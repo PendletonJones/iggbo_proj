@@ -13,6 +13,7 @@ const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const paths = require('./paths');
 const getClientEnvironment = require('./env');
 
+
 // Webpack uses `publicPath` to determine where the app is being served from.
 // It requires a trailing slash, or the file assets will get an incorrect path.
 const publicPath = paths.servedPath;
@@ -78,7 +79,7 @@ module.exports = {
         // We placed these paths second because we want `node_modules` to "win"
         // if there are any conflicts. This matches Node resolution mechanism.
         // https://github.com/facebookincubator/create-react-app/issues/253
-        modules: ['node_modules', paths.appNodeModules].concat(
+        modules: ['node_modules', path.join(__dirname, '../', 'src'), paths.appNodeModules].concat(
             // It is guaranteed to exist because we tweak it in `env.js`
             process.env.NODE_PATH.split(path.delimiter).filter(Boolean)
         ),
