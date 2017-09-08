@@ -13,6 +13,6 @@ export default (section: section) => {
 	const final_url = sprintf(API_ENDPOINT_TEMPLATE, {section});	
 	return request
 			.get(final_url)
-			.expiration(15 * 60 * 4) // expire cache after 15 minutes
+			.expiration(15 * 60) // expire cache after 15 minutes
 			.query({'api-key': API_KEY})
 }
