@@ -1,16 +1,31 @@
 // @flow
+    
+import React, { Component } from "react";
+import styled from 'styled-components';
 
-import React, { Component } from 'react';
-import 'app/App.css';
+const Wrapper = styled.div`
 
-class App extends Component {
+`
+
+interface Props {
+
+}
+
+interface State {
+
+}
+
+export default class App extends Component {
+    state: State
+    constructor(props: Props){
+        super(props);
+        this.state = {};
+    }
     render() {
         return (
-            <div>
-                Main App Content.
-            </div>
+            <Wrapper>
+                App                
+            </Wrapper>
         );
     }
 }
-
-export default App;
