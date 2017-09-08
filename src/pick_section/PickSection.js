@@ -7,7 +7,7 @@ import { SECTIONS } from 'setup/constants';
 import type { section } from 'app/App';
 
 const Wrapper = styled.nav`
-    border: solid 1px orange;
+    /*border: solid 1px orange;*/
 
     display: flex;
     flex-direction: column;
@@ -21,7 +21,7 @@ const Wrapper = styled.nav`
 `
 
 const HomeSection = styled.div`
-    border: solid 1px blue;
+    border: solid 1px #353535;
 
     display: flex;
     align-items: center;
@@ -35,11 +35,14 @@ const HomeSection = styled.div`
 `
 
 const Section = styled.div`
-    border: solid 1px blue;
+    border: solid 1px #353535;
 
     display: flex;
     align-items: center;
     justify-content: center;
+
+    font-family: 'Karla', sans-serif;
+    color: #353535;
 
     padding: 10px;
     background: ${props => props.section === props.selected_section ? "black" : "white"};
@@ -94,7 +97,7 @@ export default class PickSection extends Component {
                                     selected_section={this.props.selected_section}
                                     section={section}
                                     key={section}>
-                                    {section}
+                                    {section.toUpperCase()}
                                 </Section>
                             </Link>
                         );

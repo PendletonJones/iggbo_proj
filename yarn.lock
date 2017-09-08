@@ -1227,6 +1227,10 @@ bytes@2.5.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/bytes/-/bytes-2.5.0.tgz#4c9423ea2d252c270c41b2bdefeff9bb6b62c06a"
 
+cache-service-cache-module@1.x:
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/cache-service-cache-module/-/cache-service-cache-module-1.2.5.tgz#2d829c12a25cb6b26ace1878f7bf1a90e6571a6b"
+
 caller-path@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/caller-path/-/caller-path-0.1.0.tgz#94085ef63581ecd3daa92444a8fe94e82577751f"
@@ -4455,7 +4459,13 @@ mkdirp@0.5, mkdirp@0.5.1, mkdirp@0.5.x, "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@
   dependencies:
     minimist "0.0.8"
 
-moment@^2.18.1:
+moment-timezone-all@^0.5.5:
+  version "0.5.5"
+  resolved "https://registry.yarnpkg.com/moment-timezone-all/-/moment-timezone-all-0.5.5.tgz#30465254a5de02a77853c318191e10141c80b3ac"
+  dependencies:
+    moment ">= 2.6.0"
+
+"moment@>= 2.6.0", moment@^2.18.1:
   version "2.18.1"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.18.1.tgz#c36193dd3ce1c2eed2adb7c802dbbc77a81b1c0f"
 
@@ -5342,7 +5352,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.5.10, prop-types@^15.5.4:
+prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.6:
   version "15.5.10"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.5.10.tgz#2797dfc3126182e3a95e3dfbb2e893ddd7456154"
   dependencies:
@@ -5496,6 +5506,12 @@ react-error-overlay@^2.0.1:
     react-dom "^15 || ^16"
     settle-promise "1.0.0"
     source-map "0.5.6"
+
+react-fontawesome@^1.6.1:
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/react-fontawesome/-/react-fontawesome-1.6.1.tgz#eddce17e7dc731aa09fd4a186688a61793a16c5c"
+  dependencies:
+    prop-types "^15.5.6"
 
 react-router-dom@^4.2.2:
   version "4.2.2"
@@ -6276,6 +6292,12 @@ styled-components@^2.1.2:
 stylis@^3.2.1:
   version "3.2.15"
   resolved "https://registry.yarnpkg.com/stylis/-/stylis-3.2.15.tgz#1800f829fdf3cf0d647ae6cdb5fb70a1fd81c3e2"
+
+superagent-cache@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/superagent-cache/-/superagent-cache-2.0.0.tgz#f890aea8993d9974d5b31d3ce1ac844fad7a821c"
+  dependencies:
+    cache-service-cache-module "1.x"
 
 superagent@^3.6.0:
   version "3.6.0"

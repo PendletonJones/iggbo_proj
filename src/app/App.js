@@ -40,7 +40,7 @@ export type section =
 const Wrapper = styled.div`
     flex-grow: 1;
     display: flex;
-    border: solid 1px green;
+    /*border: solid 1px green;*/
     /*height: 100%;*/
 `
 
@@ -51,7 +51,7 @@ const LoadingView = styled.div`
     align-items: center;
     justify-content: center;
 
-    border: solid 1px green;
+    /*border: solid 1px green;*/
     /*height: 100%;*/
 `
 
@@ -59,7 +59,23 @@ const MainContent = styled.div`
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    border: solid 1px blue;
+    /*border: solid 1px blue;*/
+`
+
+const ToolBar = styled.div`
+    /*border: solid red 2px;*/
+    min-height: 70px;
+    display: flex;
+    /*flex-grow: 1;*/
+    padding: 10px;
+    margin: 10px;
+`
+
+const ShowAllButton = styled.div`
+    border: solid orange 2px;
+    max-width: 200px;
+    max-height: 40px;
+    flex-grow: 0;
 `
 
 interface Props {
@@ -78,7 +94,16 @@ export default class App extends Component {
         this.state = {
             fetched_data: Immutable.List(),
             loading_options: false,
+            has_done_initial_load: false,
+            search_value: '',
         };
+    }
+    componentDidMount(){
+        try{
+            this.loadSection(this.props.match.params.section);
+        }catch(error){
+            console.warn('found an error');
+        }
     }
     componentWillReceiveProps({match}){
         console.log('App match', match);
@@ -100,6 +125,9 @@ export default class App extends Component {
                 })
         }
     }
+    setSearchValue = (value) => {
+        this.setState({search_value: value});
+    }
     render() {
         const { match } = this.props;
         return (
@@ -107,8 +135,15 @@ export default class App extends Component {
                 <PickSection
                     selected_section={match.params.section}/>
                 <MainContent>
-                    <SearchBar/>
-                    {this.state.loading
+                    <ToolBar>
+                        <SearchBar
+                            search_value={this.state.search_value}
+                            setSearchValue={this.setSearchValue}/>
+                        <ShowAllButton>
+                            {`Show All ${this.state.fetched_data.size} Articles`}
+                        </ShowAllButton>
+                    </ToolBar>
+                    {this.state.loading_options
                         ?
                             <LoadingView>
                                 Loading...
