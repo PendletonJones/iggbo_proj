@@ -83,7 +83,10 @@ export default class PickSection extends Component {
                         selected_section={this.props.selected_section}
                         section={'home'}
                         key={'home'}>
-                        {'home'}
+                        <i 
+                            className="fa fa-home" 
+                            aria-hidden="true"/>
+                        {`  Home`}
                     </HomeSection>
                 </Link>
                 <ScrollContainer>

@@ -6,7 +6,7 @@ import './index.css';
 import App from 'app/App';
 import registerServiceWorker from 'setup/registerServiceWorker';
 import fetchInitialData from 'setup/fetchInitialData';
-import { BrowserRouter, Route } from 'react-router-dom'
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 
 
 fetchInitialData()
@@ -19,11 +19,16 @@ fetchInitialData()
 
 ReactDOM.render(
 	<BrowserRouter>
-		<Route
-			render={({match}) => 
-				<App
-					match={match}/>}
-			path={'/:section'}/>
+		<Switch>
+			<Route
+				render={({match}) => 
+							<App
+								match={match}/>}
+				path={'/:section'}/>
+			<Redirect
+				to={'/home'}/>
+		</Switch>
+
 	</BrowserRouter>,
 	document.getElementById('root')
 );

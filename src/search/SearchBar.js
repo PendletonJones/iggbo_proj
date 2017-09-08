@@ -4,14 +4,14 @@ import React, { Component } from "react";
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-	border: solid blue 2px;
+	/*border: solid blue 2px;*/
 	flex-grow: 1;
 	display: flex;
 	min-height: 70px;
 `
 
 const Input = styled.input`
-	border: solid purple 2px;
+	/*border: solid purple 2px;*/
 	padding: 20px;
 	font-size: 24px;
 	flex-grow: 1;

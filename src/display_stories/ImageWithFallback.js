@@ -4,6 +4,10 @@ import React, { Component } from "react";
 import styled from 'styled-components';
 import missing from 'styles/missing.jpg';
 
+const Img = styled.img`
+    min-height: 150px;
+`
+
 interface Props {
 
 }
@@ -21,7 +25,7 @@ export default class ImageWithFallback extends Component {
     render() {
     	const { item } = this.props;
     	return (
-    		<img
+    		<Img
     			onError={() => {
     				/* 
     					Error is never fired even if source is not found?

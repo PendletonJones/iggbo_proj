@@ -6,7 +6,7 @@ import PickSection from 'pick_section/PickSection';
 import DisplayStories from 'display_stories/DisplayStories';
 import retrieveResults from 'data/retrieveResults';
 import SearchBar from 'search/SearchBar';
-import Immutable, { fromJS } from 'immutable';
+import Immutable, { fromJS, List } from 'immutable';
 
 export type section =
     'home'
@@ -66,16 +66,28 @@ const ToolBar = styled.div`
     /*border: solid red 2px;*/
     min-height: 70px;
     display: flex;
+    align-items: stretch;
     /*flex-grow: 1;*/
     padding: 10px;
     margin: 10px;
 `
 
 const ShowAllButton = styled.div`
-    border: solid orange 2px;
-    max-width: 200px;
-    max-height: 40px;
+    /*max-height: 40px;*/
     flex-grow: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    min-width: 200px;
+
+    padding: 10px;
+    user-select: none;
+    cursor: pointer;
+
+    &:hover {
+        color: #4886ea;
+    };
 `
 
 interface Props {
@@ -96,6 +108,7 @@ export default class App extends Component {
             loading_options: false,
             has_done_initial_load: false,
             search_value: '',
+            show_all: false,
         };
     }
     componentDidMount(){
@@ -125,11 +138,40 @@ export default class App extends Component {
                 })
         }
     }
-    setSearchValue = (value) => {
+    getFinalData = () => {
+        const final_data = this.state.fetched_data.reduce((acc, item) => {
+            const bylline = item.get('bylline', '').toLowerCase();
+            const title = item.get('title', '').toLowerCase();
+            const abstract = item.get('abstract', '').toLowerCase();
+            const search_regex = new RegExp(this.state.search_value.toLowerCase());
+
+            const bylline_match = bylline.match(search_regex);
+            const title_match = title.match(search_regex);
+            const abstract_match = abstract.match(search_regex);
+
+            const has_match = bylline_match || title_match || abstract_match;
+            // console.log(has_match);
+            return (
+                !!has_match 
+                    ? acc.push(item.set('match_attributes', fromJS({
+                            bylline_match: !!bylline_match,
+                            title_match: !!title_match,
+                            abstract_match: !!abstract_match,
+                        }))) 
+                    : acc
+            );
+
+
+        }, List());
+        // console.log('final_data', final_data.toJS());
+        return final_data;
+    }
+    setSearchValue = (value: string) => {
         this.setState({search_value: value});
     }
     render() {
         const { match } = this.props;
+        const fetched_data = !!this.state.search_value ? this.getFinalData() : this.state.fetched_data;
         return (
             <Wrapper>
                 <PickSection
@@ -139,9 +181,13 @@ export default class App extends Component {
                         <SearchBar
                             search_value={this.state.search_value}
                             setSearchValue={this.setSearchValue}/>
-                        <ShowAllButton>
-                            {`Show All ${this.state.fetched_data.size} Articles`}
-                        </ShowAllButton>
+                        {(fetched_data.size > 10) && 
+                            <ShowAllButton
+                                onClick={() => this.setState(state => ({show_all: !state.show_all}))}
+                                show_all={this.state.show_all}>
+                                {this.state.show_all ? 'Show Less' : `Show All ${fetched_data.size} Articles`}
+                            </ShowAllButton>
+                        }
                     </ToolBar>
                     {this.state.loading_options
                         ?
@@ -150,7 +196,9 @@ export default class App extends Component {
                             </LoadingView>
                         :
                             <DisplayStories
-                                fetched_data={this.state.fetched_data}/>
+                                search_value={this.state.search_value}
+                                show_all={this.state.show_all}
+                                fetched_data={fetched_data}/>
                     }
                 </MainContent>
             </Wrapper>
