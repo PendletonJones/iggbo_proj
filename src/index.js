@@ -6,6 +6,8 @@ import './index.css';
 import App from 'app/App';
 import registerServiceWorker from 'setup/registerServiceWorker';
 import fetchInitialData from 'setup/fetchInitialData';
+import { BrowserRouter, Route } from 'react-router-dom'
+
 
 fetchInitialData()
 	.then((results) => {
@@ -15,5 +17,14 @@ fetchInitialData()
 		console.warn('something went wrong!', err);
 	})
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+	<BrowserRouter>
+		<Route
+			render={({match}) => 
+				<App
+					match={match}/>}
+			path={'/:section'}/>
+	</BrowserRouter>,
+	document.getElementById('root')
+);
 registerServiceWorker();
