@@ -13,3 +13,8 @@ To Build
 `yarn run build`
 or
 `npm run build`
+
+
+To Do: 
+Satisfy Flow Checker
+Write Tests
