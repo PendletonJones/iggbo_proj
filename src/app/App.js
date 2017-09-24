@@ -140,16 +140,16 @@ export default class App extends Component {
     }
     getFinalData = () => {
         const final_data = this.state.fetched_data.reduce((acc, item) => {
-            const bylline = item.get('bylline', '').toLowerCase();
-            const title = item.get('title', '').toLowerCase();
-            const abstract = item.get('abstract', '').toLowerCase();
-            const search_regex = new RegExp(this.state.search_value.toLowerCase());
-
-            const bylline_match = bylline.match(search_regex);
-            const title_match = title.match(search_regex);
+            const bylline        = item.get('bylline', '').toLowerCase();
+            const title          = item.get('title', '').toLowerCase();
+            const abstract       = item.get('abstract', '').toLowerCase();
+            
+            const search_regex   = new RegExp(this.state.search_value.toLowerCase());
+            const bylline_match  = bylline.match(search_regex);
+            const title_match    = title.match(search_regex);
             const abstract_match = abstract.match(search_regex);
 
-            const has_match = bylline_match || title_match || abstract_match;
+            const has_match      = bylline_match || title_match || abstract_match;
             // console.log(has_match);
             return (
                 !!has_match 
